@@ -84,12 +84,17 @@ abstract class GeneralPageViewState extends State<StatefulWidget> {
       backgroundColor: Theme.of(context).backgroundColor,
       titleSpacing: 0.0,
       title: ButtonTheme(
-          minWidth: 0,
-          padding: EdgeInsets.only(left: 0),
-          materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
-          shape: RoundedRectangleBorder(),
-          child: FlatButton(
-            onPressed: () => Navigator.pushNamed(context, '/' + Constants.navPersonalArea),
+        minWidth: 0,
+        padding: EdgeInsets.only(left: 0),
+        materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+        shape: RoundedRectangleBorder(),
+        child: FlatButton(
+            onPressed: () {
+              final currentRouteName = ModalRoute.of(context).settings.name;
+              if(currentRouteName != Constants.navPersonalArea){
+                Navigator.pushNamed(context, Constants.navPersonalArea);
+              }
+            },
             child: SvgPicture.asset(
               'assets/images/logo_dark.svg',
               height: queryData.size.height / 25,
