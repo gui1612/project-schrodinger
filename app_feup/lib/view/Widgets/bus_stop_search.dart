@@ -49,7 +49,7 @@ class BusStopSearch extends SearchDelegate<String> {
 
   @override
   Widget buildResults(BuildContext context) {
-    return Container();
+    return getSuggestionList(context);
   }
 
   void updateStopCallback(String stopCode, BusStopData stopData) {
@@ -146,6 +146,7 @@ class BusStopSearch extends SearchDelegate<String> {
   }
 
   Future<List<String>> getStops() async {
+    print("QUERY LOOKING: " + query + '\n');
     if (query != '') {
       return NetworkRouter.getStopsByName(query);
     }
