@@ -92,7 +92,10 @@ abstract class GeneralPageViewState extends State<StatefulWidget> {
             onPressed: () {
               final currentRouteName = ModalRoute.of(context).settings.name;
               if(currentRouteName != Constants.navPersonalArea){
-                Navigator.pushNamed(context, Constants.navPersonalArea);
+                Navigator.popUntil(
+                  context,
+                  ModalRoute.withName(Constants.navPersonalArea)
+                );
               }
             },
             child: SvgPicture.asset(
