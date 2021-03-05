@@ -46,22 +46,22 @@ class ExamCard extends GenericCard {
   }
 
   Widget generateExams(exams, context) {
-    return  Column(
+    return Column(
       mainAxisSize: MainAxisSize.min,
       children: this.getExamRows(context, exams),
     );
   }
 
   List<Widget> getExamRows(context, exams) {
-    final List<Widget> rows =  List<Widget>();
+    final List<Widget> rows = List<Widget>();
     for (int i = 0; i < 1 && i < exams.length; i++) {
       rows.add(this.createRowFromExam(context, exams[i]));
     }
     if (exams.length > 1) {
-      rows.add( Container(
+      rows.add(Container(
         margin: EdgeInsets.only(right: 80.0, left: 80.0, top: 15, bottom: 7),
-        decoration:  BoxDecoration(
-            border:  Border(
+        decoration: BoxDecoration(
+            border: Border(
                 bottom: BorderSide(
                     width: 1.5, color: Theme.of(context).accentColor))),
       ));
@@ -73,10 +73,9 @@ class ExamCard extends GenericCard {
   }
 
   Widget createRowFromExam(context, Exam exam) {
-    return  Column(children: [
-       DateRectangle(
-          date: exam.weekDay + ', ' + exam.day + ' de ' + exam.month),
-       Container(
+    return Column(children: [
+      DateRectangle(date: exam.weekDay + ', ' + exam.day + ' de ' + exam.month),
+      Container(
           child: RowContainer(
         child: ScheduleRow(
           subject: exam.subject,
@@ -90,12 +89,12 @@ class ExamCard extends GenericCard {
   }
 
   Widget createSecondaryRowFromExam(context, exam) {
-    return  Container(
+    return Container(
       margin: EdgeInsets.only(top: 8),
-      child:  RowContainer(
-        child:  Container(
+      child: RowContainer(
+        child: Container(
           padding: EdgeInsets.all(11),
-          child:  Row(
+          child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               mainAxisSize: MainAxisSize.max,
               crossAxisAlignment: CrossAxisAlignment.center,
