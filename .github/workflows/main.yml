@@ -1,0 +1,15 @@
+on: [pull_request]
+
+jobs:
+  lint-and-tests:
+    name: 'Lint and Test'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Build docker image
+        run: docker build . -t app-feup
+      - name: Lint
+        run: docker run -t app-feup flutter analyze --no-pub --preamble .
+      - name: Test
+        run: docker run -t app-feup flutter test
