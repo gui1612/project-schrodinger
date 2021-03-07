@@ -220,7 +220,7 @@ ThunkAction<AppState> getUserExams(Completer<Null> action,
       store.dispatch(SetExamsStatusAction(RequestStatus.busy));
 
       final List<Exam> exams = await extractExams(store, parserExams);
-      
+
       exams.sort((exam1, exam2) => exam1.date.compareTo(exam2.date));
 
       // Updates local database according to the information fetched -- Exams
@@ -464,6 +464,22 @@ ThunkAction<AppState> toggleFavoriteUserBusStop(
 
     final AppBusStopDatabase db = AppBusStopDatabase();
     db.updateFavoriteBusStop(stopCode);
+  };
+}
+
+//TODO
+ThunkAction<AppState> setFilteredExams(String examType) {
+  return (Store<AppState> store) {
+    //Mas o filtered exams ainda não está preenchido!
+    final Map<String, bool> filteredExams =
+        store.state.content['filteredExams'];
+
+    filteredExams[examType] = !filteredExams[examType];
+
+    //O que faz o store Dispatch?
+    //store.dispatch(getUserBusTrips(action));
+
+    //Update databse
   };
 }
 
