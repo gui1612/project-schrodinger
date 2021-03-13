@@ -88,12 +88,12 @@ class MainCardsList extends StatelessWidget {
             },
           ),
           decoration: BoxDecoration(
-              border: Border(bottom:  BorderSide(color: accentColor))),
+              border: Border(bottom: BorderSide(color: accentColor))),
         ));
       }
     });
     if (result.isEmpty) {
-      result.add( Text(
+      result.add(Text(
           '''Todos os widgets disponíveis já foram adicionados à tua área pessoal!'''));
     }
     return result;
@@ -126,7 +126,7 @@ class MainCardsList extends StatelessWidget {
         ),
         GestureDetector(
             onTap: () => StoreProvider.of<AppState>(context)
-                .dispatch( SetHomePageEditingMode(!this.isEditing(context))),
+                .dispatch(SetHomePageEditingMode(!this.isEditing(context))),
             child: Text(
               this.isEditing(context) ? 'Concluir Edição' : 'Editar',
               style: Theme.of(context)
@@ -161,7 +161,7 @@ class MainCardsList extends StatelessWidget {
     favorites.removeAt(oldIndex);
     favorites.insert(oldIndex < newIndex ? newIndex - 1 : newIndex, tmp);
     StoreProvider.of<AppState>(context)
-        .dispatch( UpdateFavoriteCards(favorites));
+        .dispatch(UpdateFavoriteCards(favorites));
     AppSharedPreferences.saveFavoriteCards(favorites);
   }
 
@@ -170,7 +170,7 @@ class MainCardsList extends StatelessWidget {
         StoreProvider.of<AppState>(context).state.content['favoriteCards'];
     favorites.removeAt(i);
     StoreProvider.of<AppState>(context)
-        .dispatch( UpdateFavoriteCards(favorites));
+        .dispatch(UpdateFavoriteCards(favorites));
     AppSharedPreferences.saveFavoriteCards(favorites);
   }
 
@@ -181,7 +181,7 @@ class MainCardsList extends StatelessWidget {
       favorites.add(type);
     }
     StoreProvider.of<AppState>(context)
-        .dispatch( UpdateFavoriteCards(favorites));
+        .dispatch(UpdateFavoriteCards(favorites));
     AppSharedPreferences.saveFavoriteCards(favorites);
   }
 
