@@ -14,8 +14,9 @@ class AppRefreshTimesDatabase extends AppDatabase {
   /// Returns a map containing all the data stored in this database.
   /// 
   /// *Note:*
-  /// * a key in this map is the type of data that was updated.
-  /// * a value in this map is the time the corresponding last update occured.
+  /// * a key in this map is an event type.
+  /// * a value in this map is the timestamp at which the data of the given type
+  /// was last updated.
   Future<Map<String, String>> refreshTimes() async {
     final Database db = await this.getDatabase();
     final List<Map<String, dynamic>> maps = await db.query('refreshtimes');
@@ -29,7 +30,6 @@ class AppRefreshTimesDatabase extends AppDatabase {
     return refreshTimes;
   }
 
-  // TODO Should this doc be more specific or is this fine?
   /// Deletes all of the data from this database.
   Future<void> deleteRefreshTimes() async {
     // Get a reference to the database
@@ -38,7 +38,7 @@ class AppRefreshTimesDatabase extends AppDatabase {
     await db.delete('refreshtimes');
   }
 
-  /// Updates the time stored for a given event.
+  /// Updates the time stored for an [event].
   void saveRefreshTime(String event, String time) async {
     final Database db = await this.getDatabase();
 

@@ -7,16 +7,17 @@ import 'package:synchronized/synchronized.dart';
 
 /// Manages a generic database.
 ///
-/// This class is the foundation of all other database managers.
+/// This class is the foundation for all other database managers.
 class AppDatabase {
   /// An instance of this database.
   Database _db;
   /// The name of this database.
   String name;
-  /// A list of commands to be executed upon initialization.
+  /// A list of commands to be executed on database creation.
   List<String> commands;
+  // A lock that synchronizes all database insertions.
   static Lock lock = Lock();
-  /// A function that is called when the version changes.
+  /// A function that is called when the [version] changes.
   final OnDatabaseVersionChangeFn onUpgrade;
   /// The version of this database.
   final int version;
@@ -33,7 +34,7 @@ class AppDatabase {
     return _db;
   }
 
-  /// Inserts [values] into the table named [table] in this database.
+  /// Inserts [values] into the corresponding [table] in this database.
   insertInDatabase(String table, Map<String, dynamic> values,
       {String nullColumnHack, ConflictAlgorithm conflictAlgorithm}) async {
     lock.synchronized(() async {

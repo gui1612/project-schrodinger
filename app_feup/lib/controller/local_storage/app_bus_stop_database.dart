@@ -87,15 +87,14 @@ class AppBusStopDatabase extends AppDatabase {
     });
   }
 
-  // TODO Should this doc be more specific or is this fine?
-  /// Deletes all of the data from this database.
+  /// Deletes all of the bus stops from this database.
   Future<void> deleteBusStops() async {
     // Get a reference to the database
     final Database db = await this.getDatabase();
     await db.delete('busstops');
   }
 
-  /// Replaces all of the data in this database with entries
+  /// Replaces all the bus stops in this database with entries
   /// from [stops].
   Future<void> setBusStops(Map<String, BusStopData> stops) async {
     await deleteBusStops();

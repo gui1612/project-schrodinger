@@ -15,7 +15,7 @@ class AppCoursesDatabase extends AppDatabase {
           abbreviation TEXT, currYear TEXT, firstEnrollment INTEGER, state TEXT)'''
         ]);
 
-  /// Replaces all of the data in this database with [courses].
+  /// Replaces all of the data in this database with the data from [courses].
   saveNewCourses(List<Course> courses) async {
     await deleteCourses();
     await _insertCourses(courses);
@@ -63,12 +63,11 @@ class AppCoursesDatabase extends AppDatabase {
     await db.delete('courses');
   }
 
-  // TODO Is this okay?
   /// Updates the state of all courses present in [states].
   /// 
   /// *Note:*
-  /// * a key in [states] should be a [Course.id].
-  /// * a value in [states] should be the new state of the corresponding course.
+  /// * a key in [states] is a [Course.id].
+  /// * a value in [states] is the new state of the corresponding course.
   void saveCoursesStates(Map<String, String> states) async {
     final Database db = await this.getDatabase();
 

@@ -2,10 +2,7 @@ import 'package:html/parser.dart' show parse;
 import 'package:http/http.dart' as http;
 import 'dart:async';
 
-/// Returns the current fees balance of the account.
-///
-/// The fees `balance` of the account is returned in 
-/// String format followed by ' €'.
+/// Extracts the balance of the user's account from an HTTP [response].
 Future<String> parseFeesBalance(http.Response response) async {
   final document = parse(response.body);
 
@@ -17,11 +14,9 @@ Future<String> parseFeesBalance(http.Response response) async {
   return balance;
 }
 
-/// Returns the current balance of the account.
-///
-/// If the table from which the parsing is done
-/// has only one `line` (there is no fee), the String 
-/// 'Sem data' is returned.
+/// Extracts the user's payment due date from an HTTP [response].
+/// 
+/// If there are no due payments, `Sem data` is returned.
 Future<String> parseFeesNextLimit(http.Response response) async {
   final document = parse(response.body);
 

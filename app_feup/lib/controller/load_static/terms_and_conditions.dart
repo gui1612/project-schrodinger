@@ -15,6 +15,10 @@ Future<String> readTermsAndConditions() async {
   }
 }
 
+/// Checks if the current Terms and Conditions have been accepted by the user.
+///
+/// Returns true if the current Terms and Conditions have been accepted,
+/// false otherwise.
 Future<bool> updateTermsAndConditionsAcceptancePreference() async {
   final hash = await AppSharedPreferences.getTermsAndConditionHash();
   final acceptance = await AppSharedPreferences.areTermsAndConditionsAccepted();
@@ -33,6 +37,7 @@ Future<bool> updateTermsAndConditionsAcceptancePreference() async {
   return currentHash != hash || !acceptance;
 }
 
+/// Accepts the current Terms and Conditions.
 Future<void> acceptTermsAndConditions() async {
   final termsAndConditions = await readTermsAndConditions();
   final currentHash = md5.convert(utf8.encode(termsAndConditions)).toString();

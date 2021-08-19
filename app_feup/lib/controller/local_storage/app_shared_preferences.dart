@@ -38,21 +38,27 @@ class AppSharedPreferences {
     prefs.setString(userPw, encode(pass));
   }
 
+  /// Sets whether or not the Terms and Conditions have been accepted.
   static Future<void> setTermsAndConditionsAcceptance(bool areAccepted) async {
     final prefs = await SharedPreferences.getInstance();
     prefs.setBool(areTermsAndConditionsAcceptedKey, areAccepted);
   }
 
+  /// Returns whether or not the Terms and Conditions have been accepted.
   static Future<bool> areTermsAndConditionsAccepted() async {
     final prefs = await SharedPreferences.getInstance();
     return prefs.getBool(areTermsAndConditionsAcceptedKey) ?? false;
   }
 
+  /// Returns the hash of the last Terms and Conditions that have
+  /// been accepted by the user.
   static Future<String> getTermsAndConditionHash() async {
     final prefs = await SharedPreferences.getInstance();
     return prefs.getString(termsAndConditions);
   }
 
+  /// Sets the hash of the Terms and Conditions that have been accepted
+  /// by the user.
   static Future<bool> setTermsAndConditionHash(String hashed) async {
     final prefs = await SharedPreferences.getInstance();
     return prefs.setString(termsAndConditions, hashed);
@@ -116,6 +122,7 @@ class AppSharedPreferences {
         defaultFavoriteCards;
   }
 
+  /// Replaces the user's exam filter settings with [newFilteredExamTypes].
   static saveFilteredExams(Map<String, bool> newFilteredExamTypes) async {
     final prefs = await SharedPreferences.getInstance();
 
@@ -125,6 +132,7 @@ class AppSharedPreferences {
     prefs.setStringList(filteredExamsTypes, newTypes);
   }
 
+  // Returns the user's exam filter settings.
   static Future<Map<String, bool>> getFilteredExams() async {
     final prefs = await SharedPreferences.getInstance();
     final List<String> storedFilteredExamTypes =
@@ -137,7 +145,7 @@ class AppSharedPreferences {
         value: (type) => storedFilteredExamTypes.contains(type));
   }
 
-  /// Encrypts [plainText] and returns its Base64 representation.
+  /// Encrypts [plainText] and returns its base64 representation.
   static String encode(String plainText) {
     final encrypter = _createEncrypter();
     return encrypter.encrypt(plainText, iv: iv).base64;

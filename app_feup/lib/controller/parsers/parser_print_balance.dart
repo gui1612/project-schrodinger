@@ -2,10 +2,7 @@ import 'package:html/parser.dart' show parse;
 import 'package:http/http.dart' as http;
 import 'dart:async';
 
-/// Returns the current balance of the account.
-///
-/// The balance of the account is returned in 
-/// String format followed by ' €'.
+/// Extracts the print balance of the user's account from an HTTP [response].
 Future<String> getPrintsBalance(http.Response response) async {
   final document = parse(response.body);
 
